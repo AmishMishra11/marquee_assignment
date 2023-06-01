@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
   const { state, dispatch } = useAuth();
@@ -11,7 +12,7 @@ function Login() {
     password: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserDetails({
       ...userDetails,
       [e.target.name]: e.target.value,
@@ -29,7 +30,6 @@ function Login() {
   const navigate = useNavigate();
 
   const test = () => {
-    console.log("clicked");
     navigate("/dashboard");
   };
 
@@ -87,8 +87,7 @@ function Login() {
           onClick={() => {
             userName && password
               ? correctLogin()
-              : //   : toast.error("Please fill all the fields");
-                alert("please fill all the fields");
+              : toast.warn("Please fill all the fields");
           }}
         >
           Login

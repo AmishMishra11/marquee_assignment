@@ -1,13 +1,13 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import { useEffect } from "react";
-import { useAuth } from "../Context/AuthContext";
 function RequiresAuth() {
-  const { state } = useAuth();
-  const { isAuth } = state;
+  const isAuth = localStorage.getItem("isAuth");
 
   useEffect(() => {
-    !isAuth && alert("Login Required");
+    !isAuth && toast.warn("Login Required");
   }, [isAuth]);
 
   return isAuth ? <Outlet /> : <Navigate to="/" />;

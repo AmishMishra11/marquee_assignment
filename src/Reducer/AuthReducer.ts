@@ -1,4 +1,5 @@
 import { User, listedUsers } from "../db/user";
+import { toast } from "react-toastify";
 
 type authType = {
   user: User | {};
@@ -38,11 +39,11 @@ export const AuthReducer = (state = authState, action: AuthAction) => {
           localStorage.setItem("isAuth", "true");
           return { ...state, user: { ...foundUser }, isAuth: true };
         }
-        alert("password incorrect");
+        toast.warn("Incorrect Password");
         return state;
       }
 
-      alert("user not found");
+      toast.warn("User not found");
 
       return state;
 
